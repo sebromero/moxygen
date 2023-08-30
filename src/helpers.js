@@ -51,7 +51,7 @@ module.exports = {
       return '{#' + name + '}';
     }
     else if (options.htmlAnchors) {
-      return '<a id="' + name + '"></a>';
+      return '<a id="' + name + '" class="anchor"></a>';
     }
     else {
       return '';
