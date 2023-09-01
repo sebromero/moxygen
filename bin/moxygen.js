@@ -28,19 +28,20 @@ program.version(pjson.version)
 logger.init(program, app.defaultOptions);
 
 if (program.args.length) {
+  const options = program.opts()
   app.run(assign({}, app.defaultOptions, {
     directory: program.args.slice(-1).pop(),
-    output: program.output,
-    groups: program.groups,
-    pages: program.pages,
-    classes: program.classes,
-    noindex: program.noindex,
-    anchors: program.anchors,
-    htmlAnchors: program.htmlAnchors,
-    language: program.language,
-    relativePaths: program.relativePaths,
-    separator: program.separator,
-    templates: program.templates,
+    output: options.output,
+    groups: options.groups,
+    pages: options.pages,
+    classes: options.classes,
+    noindex: options.noindex,
+    anchors: options.anchors,
+    htmlAnchors: options.htmlAnchors,
+    language: options.language,
+    relativePaths: options.relativePaths,
+    separator: options.separator,
+    templates: options.templates,
   }));
 }
 else {
