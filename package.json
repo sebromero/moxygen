@@ -24,10 +24,10 @@
   "author": "Kam Low",
   "license": "MIT",
   "dependencies": {
-    "commander": "^2.19.0",
-    "handlebars": "^4.0.12",
+    "commander": "^11.0.0",
+    "handlebars": "^4.7.8",
     "object-assign": "^4.1.1",
-    "winston": "^3.2.1",
-    "xml2js": "^0.4.19"
+    "winston": "^3.10.0",
+    "xml2js": "^0.4.23"
   }
 }
