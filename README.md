@@ -20,23 +20,22 @@ Moxygen is currently used in conjunction with GitBook to generate the API docume
 3. Install `moxygen` like so: `npm install moxygen -g`.
 4. Run `moxygen` providing the folder location of the XML documentation as the first argument ie. `{OUTPUT_DIRECTORY}/xml`.  
   ```
-  Usage: moxygen [options] <doxygen XML directory>
-
-  Options:
-
-    -V, --version          output the version number
-    -o, --output <file>    output file, must contain "%s" when using `groups` or `classes`
-    -g, --groups           output doxygen groups into separate files
-    -c, --classes          output doxygen classes into separate files
-    -p, --pages            output doxygen pages into separate files
-    -n, --noindex          disable generation of the index, ignored with `groups` or `classes`
-    -a, --anchors          add anchors to internal links
-    -H, --html-anchors     add html anchors to internal links
-    -l, --language <lang>  programming language
-    -t, --templates <dir>  custom templates directory
-    -L, --logfile [file]   output log messages to file
-    -q, --quiet            quiet mode
-    -h, --help             output usage information
+Usage: moxygen [options] <doxygen XML directory>
+Options:
+  -V, --version          output the version number
+  -o, --output <file>    output file, must contain "%s" when using `groups` or `classes` (default: "api.md"/"api_%s.md")
+  -g, --groups           output doxygen groups into separate files
+  -c, --classes          output doxygen classes into separate files
+  -p, --pages            output doxygen pages into separate files
+  -n, --noindex          disable generation of the index, ignored with `groups` or `classes`
+  -a, --anchors          add anchors to internal links
+  -H, --html-anchors     add html anchors to internal links
+  --links <link-type>    whether to use slugified titles, or object's refid, as link anchors (default: "title", possible values: "title" or "refid") (default: "title")
+  -l, --language <lang>  programming language (default: "objc")
+  -t, --templates <dir>  custom templates directory (default: "built-in templates")
+  -L, --logfile [file]   output log messages to file, (default: console only, default file name: "moxygen.log")
+  -q, --quiet            quiet mode
+  -h, --help             output usage information
   ```
 
 ## Multi-page Output

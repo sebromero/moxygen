@@ -24,6 +24,7 @@ module.exports = {
     groups: false,              /** Output doxygen groups separately **/
     noindex: false,             /** Disable generation of the index. Does not work with `groups` option **/
     anchors: true,              /** Generate anchors for internal links **/
+    links: 'title',             /** Use title or refid for internal links anchors **/
     language: 'cpp',            /** Programming language **/
     templates: 'templates',     /** Templates directory **/
     pages: false,               /** Output doxygen pages separately **/
@@ -80,6 +81,10 @@ module.exports = {
       else {
         options.output = this.defaultOptions.output;
       }
+    }
+
+    if (!['title', 'refid'].includes(options.links)) {
+      throw new Error(`The \`links\` option must be set to either 'title' or 'refid'. Got : '${options.links}'`)
     }
 
     if ((options.classes || options.groups) && options.output.indexOf('%s') === -1) {

@@ -10,7 +10,10 @@ var fs = require('fs');
 var path = require('path');
 var util = require('util');
 var log = require('./logger').getLogger();
-var handlebars = require('handlebars');
+
+const rControl = /[\u0000-\u001f]/g
+const rSpecial = /[\s~`!@#$%^&*()\-_+=[\]{}|\\;:"'“”‘’–—<>,.?/]+/g
+const rCombining = /[\u0300-\u036F]/g
 
 module.exports = {
 
@@ -90,15 +93,21 @@ module.exports = {
         destcompound = compound.parent
       }
 
+      const anchor = options.links === 'refid'
+        ? refid
+        : ['class', 'struct', 'interface'].includes(ref.kind)
+          ? this.slugify(`${ref.kind} \`${ref.name}\``)
+          : this.slugify(`\`${ref.name}\``)
+
       if (destcompound) {
         const destpath = this.compoundPath(destcompound, options)
         if(options.relativePaths) {
           const relative = path.relative(path.dirname(filepath), destpath)
-          return `${relative}#${refid}`
+          return `${relative}#${anchor}`
         }
-        return `${destpath}#${refid}`
+        return `${destpath}#${anchor}`
       }
-      return '#' + refid
+      return '#' + anchor
     }.bind(this))
   },
 
@@ -134,4 +143,23 @@ module.exports = {
       stream.end();
     });
   },
+
+  slugify (str) {
+    // Split accented characters into components
+    return str.normalize('NFKD')
+      // Remove accents
+      .replace(rCombining, '')
+      // Remove control characters
+      .replace(rControl, '')
+      // Replace special characters
+      .replace(rSpecial, '-')
+      // Remove continuous separators
+      .replace(/\-{2,}/g, '-')
+      // Remove prefixing and trailing separators
+      .replace(/^\-+|\-+$/g, '')
+      // ensure it doesn't start with a number (#121)
+      .replace(/^(\d)/, '_$1')
+      // lowercase
+      .toLowerCase()
+  }
 };

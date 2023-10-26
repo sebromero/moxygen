@@ -16,6 +16,7 @@ program.version(pjson.version)
   .option('-n, --noindex', 'disable generation of the index, ignored with `groups` or `classes`', false)
   .option('-a, --anchors', 'add anchors to internal links', false)
   .option('-H, --html-anchors', 'add html anchors to internal links', false)
+  .option('--links <link-type>', 'whether to use slugified titles, or object\'s refid, as link anchors (default: "title", possible values: "title" or "refid")', String, 'title')
   .option('-l, --language <lang>', 'programming language', String, 'cpp')
   .option('-t, --templates <dir>', 'custom templates directory (default: "built-in templates")', String)
   .option('-L, --logfile [file]', 'output log messages to file, (default: console only, default file name: "moxygen.log")')
@@ -38,6 +39,7 @@ if (program.args.length) {
     noindex: options.noindex,
     anchors: options.anchors,
     htmlAnchors: options.htmlAnchors,
+    links: options.links,
     language: options.language,
     relativePaths: options.relativePaths,
     separator: options.separator,
