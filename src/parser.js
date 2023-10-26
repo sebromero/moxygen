@@ -49,7 +49,7 @@ function toMarkdown(element, context) {
             break;
 
           case 'parameteritem': s = '* '; break;
-          case 'programlisting': s = '\n```cpp\n'; break;
+          case 'programlisting': s = '\n```{{language}}\n'; break;
           case 'orderedlist':
             context.push(element);
             s = '\n\n';

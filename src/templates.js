@@ -94,5 +94,8 @@ module.exports = {
     handlebars.registerHelper('anchor', function(name) {
       return helpers.getAnchor(name, options);
     });
+
+    // Give the current language name
+    handlebars.registerHelper('language', () => options.language)
   },
 };
