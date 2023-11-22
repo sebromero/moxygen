@@ -223,6 +223,23 @@ module.exports = {
   },
 
   parseMember: function (member, section, memberdef) {
+    const accessLevelOption = module.exports.parserOptions.accessLevel;
+    const memberAccessLevel = memberdef.$.prot;
+
+    // If accessLevel is set to public, only public members are parsed, skip private and protected
+    // Don't skip anything if memberAccessLevel is not defined
+    if (accessLevelOption === 'public' && memberAccessLevel && memberAccessLevel !== 'public') {
+      log.verbose('Skipping member ' + member.kind + ' ' + member.name + ' (' + memberdef.$.prot + ')');
+      return;
+    }
+    
+    // If accessLevel is set to protected, only public and protected members are parsed, skip private
+    // Don't skip anything if memberAccessLevel is not defined
+    if (accessLevelOption === 'protected' && memberAccessLevel && memberAccessLevel === 'private') {
+      log.verbose('Skipping member ' + member.kind + ' ' + member.name + ' (' + memberdef.$.prot + ')');
+      return;
+    }   
+
     log.verbose('Processing member ' + member.kind + ' ' + member.name);
     member.section = section;
     copy(member, 'briefdescription', memberdef);

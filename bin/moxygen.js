@@ -22,6 +22,7 @@ program.version(pjson.version)
   .option('-q, --quiet', 'quiet mode', false)
   .option('-r, --relative-paths', 'links are relative (don`t include the output path)', false)
   .option('-s, --separator <separator sequence>', 'separator sequence (default: "::")', '::')
+  .option('-A, --access-level <public|protected|private>', 'minimum access level to be considered', 'private')
 
   .parse(process.argv);
 
@@ -42,6 +43,7 @@ if (program.args.length) {
     relativePaths: options.relativePaths,
     separator: options.separator,
     templates: options.templates,
+    accessLevel: options.accessLevel,
   }));
 }
 else {

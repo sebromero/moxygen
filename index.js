@@ -32,6 +32,7 @@ module.exports = {
     logfile: 'moxygen.log',     /** Log file **/
     relativePaths: false,       /** Use relative paths (omit output base path) **/
     separator: '::',            /** Group separator sequence **/
+    accessLevel: 'private',     /** Minimum access level to be considered **/
 
     filters: {
       members: [
@@ -89,6 +90,10 @@ module.exports = {
 
     if (typeof options.templates == "undefined") {
       options.templates = path.join(__dirname, this.defaultOptions.templates, options.language);
+    }
+
+    if(options.accessLevel && options.accessLevel !== 'private' && options.accessLevel !== 'protected' && options.accessLevel !== 'public'){
+      throw "The `accessLevel` option must be one of 'private', 'protected', or 'public'"
     }
 
     // Load templates
