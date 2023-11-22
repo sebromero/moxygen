@@ -34,6 +34,7 @@ Moxygen is currently used in conjunction with GitBook to generate the API docume
     -H, --html-anchors     add html anchors to internal links
     -l, --language <lang>  programming language
     -t, --templates <dir>  custom templates directory
+    -r, --relative-paths   links to referenced MD files are relative
     -A, --access-level     minimum access level to be considered for output (public|protected|private)
     -L, --logfile [file]   output log messages to file
     -q, --quiet            quiet mode
