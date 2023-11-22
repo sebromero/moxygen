@@ -25,11 +25,18 @@ module.exports = {
   load: function (templateDirectory) {
     fs.readdirSync(templateDirectory).forEach(function (filename) {
       var fullname = path.join(templateDirectory, filename);
+      // Skip files that are no markdown files
+      if (!filename.match(/\.md$/)) {
+        return;
+      }
+      
+      const templateBasename = path.basename(filename, '.md');
+
       var template = handlebars.compile(fs.readFileSync(fullname, 'utf8'), {
         noEscape: true,
         strict: true
       });
-      this.templates[filename.match(/(.*)\.md$/)[1]] = template;
+      this.templates[templateBasename] = template;
     }.bind(this));
   },
 
