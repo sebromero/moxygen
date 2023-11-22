@@ -14,6 +14,9 @@ var helpers = require('./src/helpers');
 
 module.exports = {
 
+  // Export logger so it can be initialized by importing module
+  logger: require('./src/logger'),
+
   /**
    * Default options values.
    **/
