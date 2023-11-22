@@ -16,7 +16,7 @@ let logger = winston.createLogger({
 
 module.exports = {
 
-  init : function (options, defaultOptions) {
+  init : function (options) {
     // Logger transports
     let logfile = null;
     let logterm = null;
@@ -33,10 +33,6 @@ module.exports = {
 
     // User defined log file?
     if (typeof options.logfile != 'undefined') {
-      // Use default log file name?
-      if (options.logfile === true) {
-        options.logfile = defaultOptions.logfile;
-      }
       // Create log file transport
       logfile = new winston.transports.File({
         filename : options.logfile,

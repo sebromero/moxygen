@@ -45,7 +45,7 @@ program.version(pjson.version)
     accessLevel: options.accessLevel,
     quiet: options.quiet
   }); 
-  logger.init(finalOptions, app.defaultOptions);
+  logger.init(finalOptions);
   app.run(finalOptions);
 }
 else {
