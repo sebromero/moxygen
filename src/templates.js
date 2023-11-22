@@ -104,5 +104,17 @@ module.exports = {
 
     // Give the current language name
     handlebars.registerHelper('language', () => options.language)
+
+    // Strips formatting from the prototype
+    handlebars.registerHelper('stripmarkdown', function(prototype) {
+      // Remove backticks
+      prototype = prototype.replace(/`/g, '');
+
+      // Remove markdown links
+      prototype = prototype.replace(/\[([^\]]*)\]\([^)]*\)/g, '$1');
+      
+      // Remove double spaces
+      return prototype.replace(/\s{2,}/g, ' ');
+    });
   },
 };
