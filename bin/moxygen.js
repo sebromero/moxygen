@@ -26,11 +26,10 @@ program.version(pjson.version)
 
   .parse(process.argv);
 
-logger.init(program, app.defaultOptions);
-
-if (program.args.length) {
-  const options = program.opts()
-  app.run(assign({}, app.defaultOptions, {
+  
+  if (program.args.length) {
+    const options = program.opts()    
+    const finalOptions = assign({}, app.defaultOptions, {
     directory: program.args.slice(-1).pop(),
     output: options.output,
     groups: options.groups,
@@ -44,7 +43,10 @@ if (program.args.length) {
     separator: options.separator,
     templates: options.templates,
     accessLevel: options.accessLevel,
-  }));
+    quiet: options.quiet
+  }); 
+  logger.init(finalOptions, app.defaultOptions);
+  app.run(finalOptions);
 }
 else {
   program.help();
