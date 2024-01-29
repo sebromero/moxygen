@@ -107,14 +107,15 @@ module.exports = {
 
     // Strips formatting from the prototype
     handlebars.registerHelper('stripmarkdown', function(prototype) {
-      // Remove backticks
-      prototype = prototype.replace(/`/g, '');
-
-      // Remove markdown links
-      prototype = prototype.replace(/\[([^\]]*)\]\([^)]*\)/g, '$1');
-      
-      // Remove double spaces
-      return prototype.replace(/\s{2,}/g, ' ');
+      return helpers.stripMarkdown(prototype);
     });
+
+    handlebars.registerHelper('adjust-access-modifiers', function(prototype) {
+      if(!options.showAccessModifiers) {
+        return helpers.stripAccessModifiers(prototype);
+      }
+      return prototype;
+    });
+
   },
 };

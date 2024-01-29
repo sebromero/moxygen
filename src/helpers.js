@@ -134,4 +134,21 @@ module.exports = {
       stream.end();
     });
   },
+
+  stripMarkdown(text){
+    // Remove backticks
+    text = text.replace(/`/g, '');
+
+    // Remove markdown links
+    text = text.replace(/\[([^\]]*)\]\([^)]*\)/g, '$1');
+    
+    // Remove double spaces
+    return text.replace(/\s{2,}/g, ' ');
+  },
+
+  // Strip access modifiers from the beginning of the string
+  stripAccessModifiers(text){
+    return text.replace(/^(public|protected|private|internal)\s/, '');    
+  }
+
 };
